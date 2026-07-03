@@ -1,6 +1,8 @@
 const express = require("express");
-const app = express();
 require("dotenv").config();
+const app = express();
+
+app.use(express.json());
 
 const albums = [
 
@@ -31,8 +33,7 @@ app.post("/albums/:id", (req, res) => {
         } else {
             Object.assign(albumToUpdate, updatedAlbumData);
             res.status(200).json({ message: "Album updated successfully", album: albumToUpdate });
-        }
-        
+        }    
    }
 });
 
@@ -63,11 +64,9 @@ app.post("/albums/:id", (req, res) => {
         } else {
             Object.assign(albumToUpdate, updatedAlbumData);
             res.status(200).json({ message: "Album updated successfully", album: albumToUpdate });
-        }
-        
+        }  
    }
 });
-
 
 app.get("/albums", (req, res) => {
     res.send(albums);
