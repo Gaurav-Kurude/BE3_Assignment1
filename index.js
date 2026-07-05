@@ -19,6 +19,24 @@ app.get("/", (req, res) => {
   res.send("Hello, This is Express Assignment Server.");
 });
 
+app.post("/albums", (req, res) => {
+    const { id, title, artist, year } = req.body;
+
+    if (!id || !title || !artist || !year) {
+        return res.status(400).json({
+            error: "All album data is required"
+        });
+    }
+
+    const newAlbum = { id, title, artist, year };
+    albums.push(newAlbum);
+
+    res.status(201).json({
+        message: "Album added successfully",
+        album: newAlbum
+    });
+});
+
 app.post("/albums/:id", (req, res) => {
     const albumId = parseInt(req.params.id);
     const updatedAlbumData = req.body;
